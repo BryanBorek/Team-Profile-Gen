@@ -4,6 +4,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+// Ask for the users information and set them as Manager
 function addManager() {
     inquirer //ask for name, id, email, office
         .prompt([
@@ -29,7 +30,6 @@ function addManager() {
             },
         ])
         .then((userInput) => {
-            let manager = new Manager(userInput.name, userInput.id, userInput.email, userInput.office);
             const managerCard = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,15 +45,15 @@ function addManager() {
     <h1 class="font-weight-bold text-white py-3">My Team</h1>
 </header>
 <body>
-    <main class="row d-flex mx-3 w-100">
-        <div class="w-25 border border-dark">
+    <main class="row d-flex justify-content-center mx-3 w-100">
+        <div class="w-25 m-3 border border-dark">
             <section class="bg-primary">
                 <h1 class="text-left text-white p-2">${userInput.name}</h1>
-                <h2 class="text-left text-white p-2">Manager</h2>
+                <h2 class="text-left text-white p-2">☕ Manager</h2>
             </section>
             <section class="bg-light">
                 <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
-                <h3 class="text-left bg-white p-2">Email:${userInput.email}</h3>
+                <h3 class="text-left bg-white p-2">Email:<a href="mailto:${userInput.email}" target="_blank">${userInput.email}</a></h3>
                 <h3 class="text-left bg-white p-2">Office:${userInput.office}</h3>
             </section>
         </div>`;
@@ -61,6 +61,7 @@ function addManager() {
         })
 }
 
+// Ask the user if they would liek to add employees or finish the html
 function addEmployee() {
     inquirer
         .prompt([
@@ -94,6 +95,7 @@ function addEmployee() {
         }))
 }
 
+// Ask for the employee information then append it to the html
 function addEngineer() {
     inquirer //ask for name, id, email, github
         .prompt([
@@ -115,21 +117,20 @@ function addEngineer() {
             {
                 type: 'input',
                 name: 'github',
-                message: 'What is their GitHub link?',
+                message: 'What is their GitHub name?',
             },
         ])
         .then(userInput => {
-            let engineer = new Engineer(userInput.name, userInput.id, userInput.email, userInput.github);
-            const engineerCard = `<div class="w-25 border border-dark">
+            const engineerCard = `<div class="w-25 m-3 border border-dark">
     <section class="bg-primary">
         <h1 class="text-left text-white p-2">${userInput.name}</h1>
-       <h2 class="text-left text-white p-2">Engineer</h2>
+       <h2 class="text-left text-white p-2">👓 Engineer</h2>
     </section>
     <section class="bg-light">
         <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
-        <h3 class="text-left bg-white p-2">Email:${userInput.email}</h3>
-        <h3 class="text-left bg-white p-2">GitHub:${userInput.github}</h3>
-    </section>
+        <h3 class="text-left bg-white p-2">Email:<a href="mailto:${userInput.email}" target="_blank">${userInput.email}</a></h3>
+        <h3 class="text-left bg-white p-2">Github:<a href="https://github.com/${userInput.github}" target="_blank">${userInput.github}</a></h3>
+        </section>
 </div>`; //write html for engineer card 
             fs.appendFile('./dist/newTeam.html', engineerCard, err => err ? console.log(err) : addEmployee());
         })
@@ -160,15 +161,14 @@ function addIntern() {
             },
         ])
         .then(userInput => {
-            let intern = new Intern(userInput.name, userInput.id, userInput.email, userInput.school);
-            const internCard = `<div class="w-25 border border-dark">
+            const internCard = `<div class="w-25 m-3 border border-dark">
     <section class="bg-primary">
         <h1 class="text-left text-white p-2">${userInput.name}</h1>
-        <h2 class="text-left text-white p-2">Intern</h2>
+        <h2 class="text-left text-white p-2">🧑‍🎓 Intern</h2>
     </section>
     <section class="bg-light">
         <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
-        <h3 class="text-left bg-white p-2">Email:${userInput.email}</h3>
+        <h3 class="text-left bg-white p-2">Email:<a href="mailto:${userInput.email}" target="_blank">${userInput.email}</a></h3>
         <h3 class="text-left bg-white p-2">School:${userInput.school}</h3>
     </section>
 </div>`;

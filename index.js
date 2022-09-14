@@ -4,13 +4,13 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-
 function addManager() {
     inquirer //ask for name, id, email, office
         .prompt([
             {
                 type: 'input',
-                name: 'Please enter your name.',
+                name: 'name',
+                message: 'Please enter your name.',
             },
             {
                 type: 'input',
@@ -30,7 +30,33 @@ function addManager() {
         ])
         .then((userInput) => {
             let manager = new Manager(userInput.name, userInput.id, userInput.email, userInput.office);
-            const managerCard = 'im a whole webpage and manager card'; //write html for the team page and manager card 
+            const managerCard = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <title>My Team</title>
+</head>
+<header class="text-center bg-danger">
+    <h1 class="font-weight-bold text-white py-3">My Team</h1>
+</header>
+<body>
+    <main class="row d-flex mx-3 w-100">
+        <div class="w-25 border border-dark">
+            <section class="bg-primary">
+                <h1 class="text-left text-white p-2">${userInput.name}</h1>
+                <h2 class="text-left text-white p-2">Manager</h2>
+            </section>
+            <section class="bg-light">
+                <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
+                <h3 class="text-left bg-white p-2">Email:${userInput.email}</h3>
+                <h3 class="text-left bg-white p-2">Office:${userInput.office}</h3>
+            </section>
+        </div>`;
             fs.writeFile('./dist/newTeam.html', managerCard, err => err ? console.log(err) : addEmployee());
         })
 }
@@ -56,7 +82,14 @@ function addEmployee() {
                     break
 
                 case 'No':
-                    console.log('Goodbye');
+                    console.log('Writing webpage...');
+                    const finishWriting = `
+        </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>`;
+                    fs.appendFile('./dist/newTeam.html', finishWriting, err => err ? console.log(err) : console.log('Success'));
             }
         }))
 }
@@ -66,7 +99,8 @@ function addEngineer() {
         .prompt([
             {
                 type: 'input',
-                name: 'What is their name?',
+                name: 'name',
+                message: 'What is their name?',
             },
             {
                 type: 'input',
@@ -86,7 +120,17 @@ function addEngineer() {
         ])
         .then(userInput => {
             let engineer = new Engineer(userInput.name, userInput.id, userInput.email, userInput.github);
-            const engineerCard = ' im an engineer card'; //write html for engineer card 
+            const engineerCard = `<div class="w-25 border border-dark">
+    <section class="bg-primary">
+        <h1 class="text-left text-white p-2">${userInput.name}</h1>
+       <h2 class="text-left text-white p-2">Engineer</h2>
+    </section>
+    <section class="bg-light">
+        <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
+        <h3 class="text-left bg-white p-2">Email:${userInput.email}</h3>
+        <h3 class="text-left bg-white p-2">GitHub:${userInput.github}</h3>
+    </section>
+</div>`; //write html for engineer card 
             fs.appendFile('./dist/newTeam.html', engineerCard, err => err ? console.log(err) : addEmployee());
         })
 }
@@ -96,7 +140,8 @@ function addIntern() {
         .prompt([
             {
                 type: 'input',
-                name: 'What is their name?',
+                name: 'name',
+                message: 'What is their name?',
             },
             {
                 type: 'input',
@@ -116,7 +161,17 @@ function addIntern() {
         ])
         .then(userInput => {
             let intern = new Intern(userInput.name, userInput.id, userInput.email, userInput.school);
-            const internCard = ' im an intern card'; //write html for engineer card 
+            const internCard = `<div class="w-25 border border-dark">
+    <section class="bg-primary">
+        <h1 class="text-left text-white p-2">${userInput.name}</h1>
+        <h2 class="text-left text-white p-2">Intern</h2>
+    </section>
+    <section class="bg-light">
+        <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
+        <h3 class="text-left bg-white p-2">Email:${userInput.email}</h3>
+        <h3 class="text-left bg-white p-2">School:${userInput.school}</h3>
+    </section>
+</div>`;
             fs.appendFile('./dist/newTeam.html', internCard, err => err ? console.log(err) : addEmployee());
         })
 }

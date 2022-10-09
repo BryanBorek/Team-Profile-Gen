@@ -1,9 +1,5 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Manager = require('./lib/Manager');
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
-
 // Ask for the users information and set them as Manager
 function addManager() {
     inquirer //ask for name, id, email, office
@@ -51,7 +47,7 @@ function addManager() {
                 <h1 class="text-left text-white p-2">${userInput.name}</h1>
                 <h2 class="text-left text-white p-2">☕ Manager</h2>
             </section>
-            <section class="bg-light">
+            <section class="bg-light p-3">
                 <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
                 <h3 class="text-left bg-white p-2">Email:<a href="mailto:${userInput.email}" target="_blank">${userInput.email}</a></h3>
                 <h3 class="text-left bg-white p-2">Office:${userInput.office}</h3>
@@ -126,7 +122,7 @@ function addEngineer() {
         <h1 class="text-left text-white p-2">${userInput.name}</h1>
        <h2 class="text-left text-white p-2">👓 Engineer</h2>
     </section>
-    <section class="bg-light">
+    <section class="bg-light p-3">
         <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
         <h3 class="text-left bg-white p-2">Email:<a href="mailto:${userInput.email}" target="_blank">${userInput.email}</a></h3>
         <h3 class="text-left bg-white p-2">Github:<a href="https://github.com/${userInput.github}" target="_blank">${userInput.github}</a></h3>
@@ -166,7 +162,7 @@ function addIntern() {
         <h1 class="text-left text-white p-2">${userInput.name}</h1>
         <h2 class="text-left text-white p-2">🧑‍🎓 Intern</h2>
     </section>
-    <section class="bg-light">
+    <section class="bg-light p-3">
         <h3 class="text-left bg-white p-2">ID:${userInput.id}</h3>
         <h3 class="text-left bg-white p-2">Email:<a href="mailto:${userInput.email}" target="_blank">${userInput.email}</a></h3>
         <h3 class="text-left bg-white p-2">School:${userInput.school}</h3>

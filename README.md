@@ -14,4 +14,4 @@ Build your team just the way you want it with this generator. Add names, offices
 
 Github repository link: https://github.com/BryanBorek/Team-Profile-Gen
 
-Video Link: 
+Video Link: https://drive.google.com/file/d/1gTnDsGr7ahcbZsala36vp3M5jHPowxir/view
